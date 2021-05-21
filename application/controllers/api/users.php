@@ -30,6 +30,27 @@ class Users extends REST_Controller{
             ], REST_Controller::HTTP_NOT_FOUND);  
         }
     }
+
+    public function index_post(){
+        $data = [
+            'nama' => $this->post('nama'),
+            'password' => $this->post('password'),
+            'email' => $this->post('email'),
+            'no_telepon' => $this->post('no_telepon')
+        ];
+
+        if( $this->user->createUsers($data) > 0){
+            $this->response([
+                'status' => true,
+                'message' => 'Pendaftaran berhasil'
+            ], REST_Controller::HTTP_CREATED);  
+        }else{
+            $this->response([
+                'status' => false,
+                'message' => 'Ada yang salah, coba lagi yuk'
+            ], REST_Controller::HTTP_BAD_REQUEST);  
+        }
+    }
 }
 
 ?>
