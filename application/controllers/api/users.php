@@ -31,6 +31,21 @@ class Users extends REST_Controller{
         }
     }
 
+    public function login_post()
+    {
+        $email = $this->post('email');
+        $password = $this->post('password');
+
+        $user = $this->user->get_user_by_email($email);
+        if ($user['email'] == $email && $user['password'] == $password) {
+            $this->response($user);
+        } else {
+            $this->response([
+                'status' => 'Login failed'
+            ]);
+        }
+    }
+
     public function index_post(){
         $data = [
             'nama' => $this->post('nama'),
