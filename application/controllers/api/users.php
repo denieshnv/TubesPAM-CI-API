@@ -20,12 +20,12 @@ class Users extends REST_Controller{
         }
         if ($users){
             $this->response([
-                'status' => true,
+                
                 'data' => $users
             ], REST_Controller::HTTP_OK);
         }else{
             $this->response([
-                'status' => false,
+                
                 'message' => 'ID tidak ditemukan'
             ], REST_Controller::HTTP_NOT_FOUND);  
         }
@@ -41,15 +41,17 @@ class Users extends REST_Controller{
 
         if( $this->user->createUsers($data) > 0){
             $this->response([
-                'status' => true,
-                'message' => 'Pendaftaran berhasil'
+              
+                $Message = "Pendaftaran berhasil"
             ], REST_Controller::HTTP_CREATED);  
         }else{
             $this->response([
-                'status' => false,
-                'message' => 'Ada yang salah, coba lagi yuk'
+                
+                $Message = "Ada yang salah, coba lagi yuk"
             ], REST_Controller::HTTP_BAD_REQUEST);  
         }
+        $reponse[]=array("Message"=>$Message);
+        echo json_encode($reponse);
     }
 }
 
