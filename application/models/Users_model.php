@@ -15,7 +15,7 @@ class Users_model extends CI_Model
         return $this->db->affected_rows();
     }
 
-    public function getUserByEmail($email)
+    public function get_user_by_email($email)
     {
         return $this->db->get_where('users', ['email' => $email])->row_array();
     }
